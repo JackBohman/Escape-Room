@@ -3382,6 +3382,7 @@ PrefabInstance:
       objectReference: {fileID: 198205401}
     m_RemovedComponents:
     - {fileID: 808951038241401031, guid: 49f576a03ece56a4e9c640ed081f6a68, type: 3}
+    - {fileID: 808951037945062156, guid: 49f576a03ece56a4e9c640ed081f6a68, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 808951037779812807, guid: 49f576a03ece56a4e9c640ed081f6a68, type: 3}
@@ -4046,8 +4047,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PadlockDrawerMove
   pull_01: {fileID: 1338574833}
   open: 0
-  Player: {fileID: 198205401}
+  player: {fileID: 198205401}
   padlock: {fileID: 2017451844}
+  maxInteractionDist: 3
 --- !u!1001 &1388774295
 PrefabInstance:
   m_ObjectHideFlags: 0

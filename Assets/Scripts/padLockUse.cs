@@ -24,9 +24,12 @@ public class PadlockUse : MonoBehaviour
             }
             return; // Exit early so we don't raycast while looking at the UI/padlock close-up
         }
+        if (padlock.active == false){
+            padlockCamera.SetActive(false);
+        }
 
-        // 2. Define and perform the Raycast (only happens if padlock is NOT active)
-        Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
+            // 2. Define and perform the Raycast (only happens if padlock is NOT active)
+            Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, maxDist))
@@ -48,7 +51,7 @@ public class PadlockUse : MonoBehaviour
         inputLocked = state; // Keeps your input lock synced perfectly with the padlock state
 
         Debug.Log("Padlock toggled: " + state);
-        padlockCamera.SetActive(state);
+        padlockCamera.SetActive(!state);
 
         // Optional: If you want to disable the main camera or player movement when true, do it here
     }
