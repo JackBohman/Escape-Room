@@ -4049,6 +4049,7 @@ MonoBehaviour:
   open: 0
   player: {fileID: 198205401}
   padlock: {fileID: 2017451844}
+  padlockScript: {fileID: 1044784722}
   maxInteractionDist: 3
 --- !u!1001 &1388774295
 PrefabInstance:
