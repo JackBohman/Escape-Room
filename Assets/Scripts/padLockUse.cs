@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class PadlockUse : MonoBehaviour
-
 {
     public float maxDist = 3.0f;
     public GameObject padlock;
@@ -15,37 +14,42 @@ public class PadlockUse : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(playerCam.transform.position, playerCam.transform.forward * maxDist, Color.purple);
-        // 1. If the padlock view is already open, pressing E should close it and stop
-        if (isPadlockActive && Input.GetKeyDown(KeyCode.E))
+
+        // 1. If the padlock view is already open, pressing E closes it
+        if (isPadlockActive)
         {
-            TogglePadlock(false);
-            return; // Exit Update so we don't accidentally re-trigger the raycast logic
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                TogglePadlock(false);
+            }
+            return; // Exit early so we don't raycast while looking at the UI/padlock close-up
         }
-        // 2. Define the ray starting from the center of the camera
+
+        // 2. Define and perform the Raycast (only happens if padlock is NOT active)
         Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
         RaycastHit hit;
 
-        // 3. Perform the Raycast
         if (Physics.Raycast(ray, out hit, maxDist))
         {
-            //Debug.Log("PADTOUCH");
             if (hit.collider.CompareTag("Padlock"))
             {
-                TogglePadlock(true);
-                return;
+                // 3. Require the player to press E to actually open it
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TogglePadlock(true);
+                }
             }
         }
-        if (isPadlockActive)
-        {
-            inputLocked = true;
-        }
     }
+
     void TogglePadlock(bool state)
     {
         isPadlockActive = state;
+        inputLocked = state; // Keeps your input lock synced perfectly with the padlock state
+
         Debug.Log("Padlock toggled: " + state);
         padlockCamera.SetActive(state);
 
+        // Optional: If you want to disable the main camera or player movement when true, do it here
     }
-
 }
